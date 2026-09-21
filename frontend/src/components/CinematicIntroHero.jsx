@@ -29,13 +29,51 @@ export default function CinematicIntroHero() {
     const activeVideo = videoRefs[currentIndex].current
     if (activeVideo) {
       activeVideo.currentTime = 0
-      activeVideo.play().catch(() => {})
+      activeVideo.play().catch(() => { })
     }
   }, [currentIndex])
 
+  // Staggered luxury reveal variants for reload animation
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.18,
+        delayChildren: 0.25,
+      },
+    },
+  }
+
+  const textItemVariants = {
+    hidden: { opacity: 0, y: 35, filter: 'blur(6px)' },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: 1.1,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  }
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 25, scale: 0.96 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.9,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  }
+
   return (
     <div className="sticky top-0 w-full h-[100vh] overflow-hidden bg-[#0A0A0A] text-white select-none relative z-0">
-      
+
       {/* ================= DUAL VIDEO PLAYLIST WITH CLASSIC CROSSFADE (WITHOUT OVERLAY) ================= */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {videos.map((src, idx) => {
@@ -48,49 +86,49 @@ export default function CinematicIntroHero() {
               muted
               playsInline
               onEnded={() => handleVideoEnd(idx)}
-              className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1400ms] ease-in-out transform ${
-                isActive
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1400ms] ease-in-out transform ${isActive
                   ? 'opacity-100 scale-100'
                   : 'opacity-0 scale-105 pointer-events-none'
-              }`}
+                }`}
             />
           )
         })}
       </div>
 
-      {/* Subtle Bottom-Left Gradient Overlay for High Contrast Text Visibility */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none z-5" />
+      {/* ================= HERO CONTENT WITH STAGGERED RELOAD ANIMATION (NO SHADOWS) ================= */}
+      <motion.div
+        key="hero-text-content"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="absolute bottom-20 left-6 sm:bottom-28 sm:left-12 lg:bottom-32 lg:left-20 xl:left-24 z-10 max-w-xl sm:max-w-2xl text-left space-y-4 sm:space-y-6"
+      >
 
-      {/* ================= HERO CONTENT (EDITORIAL LEFT ALIGNMENT SHIFTED UPWARD) ================= */}
-      <div className="absolute bottom-20 left-6 sm:bottom-28 sm:left-12 lg:bottom-32 lg:left-20 xl:left-24 z-10 max-w-xl sm:max-w-2xl text-left space-y-4 sm:space-y-6">
-        
-        {/* Editorial Serif Main Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="font-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tight text-white leading-[1.08] drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)]"
-        >
-          Your Home In
-          <span className="italic font-normal block text-white mt-1">Nagpur.</span>
-        </motion.h1>
+        {/* Editorial Serif Main Headline (Shadow Removed) */}
+        <div className="overflow-hidden">
+          <motion.h1
+            variants={textItemVariants}
+            className="font-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-light tracking-tight leading-[1.08]"
+          >
+            <span className="bg-gradient-to-b from-[#EFCA74] via-[#F3DB9E] to-white bg-clip-text text-transparent inline-block">
+              Your Home In
+            </span>
+            <span className="italic font-normal block text-[#EFCA74] mt-1">Nagpur.</span>
+          </motion.h1>
+        </div>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-          className="font-sans text-sm sm:text-base lg:text-lg text-slate-200 font-light leading-relaxed max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]"
-        >
-          Thoughtfully planned residential homes with contemporary architecture, luxury amenities, and unmatched connectivity in Jaiprakash Nagar.
-        </motion.p>
+        {/* Subtitle (Shadow Removed) */}
+        <div className="overflow-hidden">
+          <motion.p
+            variants={textItemVariants}
+            className="font-sans text-sm sm:text-base lg:text-lg text-slate-100 font-light leading-relaxed max-w-xl"
+          >
+            Thoughtfully planned residential homes with contemporary architecture, luxury amenities, and unmatched connectivity in Jaiprakash Nagar.
+          </motion.p>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
-          className="pt-2"
-        >
+        {/* Explore Button */}
+        <motion.div variants={buttonVariants} className="pt-2">
           <motion.button
             onClick={scrollToContent}
             whileHover={{ scale: 1.04, y: -2 }}
@@ -112,20 +150,19 @@ export default function CinematicIntroHero() {
         </motion.div>
 
         {/* Video Slide Indicators */}
-        <div className="flex items-center gap-2 pt-2">
+        <motion.div variants={buttonVariants} className="flex items-center gap-2 pt-2">
           {videos.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`h-1.5 transition-all duration-500 rounded-full cursor-pointer pointer-events-auto ${
-                idx === currentIndex ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'
-              }`}
+              className={`h-1.5 transition-all duration-500 rounded-full cursor-pointer pointer-events-auto ${idx === currentIndex ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/70'
+                }`}
               title={`Switch to Video ${idx + 1}`}
             />
           ))}
-        </div>
+        </motion.div>
 
-      </div>
+      </motion.div>
 
     </div>
   )
