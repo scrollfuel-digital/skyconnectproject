@@ -1,44 +1,62 @@
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import Navbar from './components/layout/Navbar.jsx'
-import Footer from './components/layout/Footer.jsx'
+import Lenis from 'lenis'
+import Navbar from './components/ui/Navbar.jsx'
+import Footer from './components/ui/Footer.jsx'
 import AppRoutes from './routes/AppRoutes.jsx'
-import { AuthProvider } from './context/AuthContext.jsx'
 
-function ScrollHandler() {
+function SmoothScrollProvider({ children }) {
   const { pathname, hash } = useLocation()
 
   useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
+    })
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    const rafId = requestAnimationFrame(raf)
+
     if (hash) {
       const targetId = hash.replace('#', '')
       const el = document.getElementById(targetId)
       if (el) {
         setTimeout(() => {
-          el.scrollIntoView({ behavior: 'smooth' })
-        }, 80)
-        return
+          lenis.scrollTo(el, { offset: -75, duration: 1.4 })
+        }, 100)
       }
     }
-    window.scrollTo({ top: 0, behavior: 'instant' })
+
+    return () => {
+      cancelAnimationFrame(rafId)
+      lenis.destroy()
+    }
   }, [pathname, hash])
 
-  return null
+  return children
 }
 
 function App() {
   return (
-    <AuthProvider>
-      <ScrollHandler />
-      <div className="flex flex-col min-h-screen">
+    <SmoothScrollProvider>
+      <div className="min-h-screen bg-[#FAF8F5] text-slate-900 flex flex-col font-sans selection:bg-[#EFCA74] selection:text-[#18181B]">
         <Navbar />
-        <main className="flex-1">
+        <main className="flex-grow">
           <AppRoutes />
         </main>
         <Footer />
       </div>
-    </AuthProvider>
+    </SmoothScrollProvider>
   )
 }
 
 export default App
-
