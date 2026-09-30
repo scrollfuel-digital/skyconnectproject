@@ -210,7 +210,6 @@ export default function LocationSection() {
           </section>
         </div>
 
-        <p className="map-footnote">This is an interactive map; directions start directly from SkyConnect, Jaiprakash Nagar, Nagpur via Google Maps.</p>
       </div>
     </main>
   )

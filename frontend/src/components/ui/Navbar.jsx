@@ -143,11 +143,11 @@ export default function Navbar() {
           <div className="flex items-center gap-4 sm:gap-6">
             <button
               onClick={() => setModalOpen(true)}
-              className="border border-[#EFCA74]/80 rounded-full px-4 sm:px-6 py-2 text-[#EFCA74] hover:bg-[#EFCA74] hover:text-black transition-all duration-300 font-medium tracking-widest text-xs lg:text-sm uppercase flex items-center gap-2 shadow-sm cursor-pointer group"
+              className="border border-[#EFCA74]/80 rounded-full px-3 sm:px-6 py-1.5 sm:py-2 text-[#EFCA74] hover:bg-[#EFCA74] hover:text-black transition-all duration-300 font-medium tracking-widest text-[11px] sm:text-xs lg:text-sm uppercase flex items-center gap-1.5 sm:gap-2 shadow-sm cursor-pointer group"
               aria-label="Enquire Now"
             >
               <span>ENQUIRE NOW</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
 
             <button

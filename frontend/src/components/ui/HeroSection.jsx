@@ -116,7 +116,7 @@ export default function HeroSection({ onEnquire }) {
       </button>
 
       {/* HERO MAIN CONTAINER */}
-      <div className="relative z-10 max-w-7xl mx-auto h-full px-12 sm:px-16 lg:px-20 flex flex-col justify-center pt-28 pb-12">
+      <div className="relative z-10 max-w-7xl mx-auto h-full px-6 sm:px-16 lg:px-20 flex flex-col justify-center pt-24 sm:pt-28 pb-12">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
@@ -148,7 +148,7 @@ export default function HeroSection({ onEnquire }) {
                       animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                       exit={{ opacity: 0, y: -18, filter: 'blur(6px)' }}
                       transition={{ duration: 0.85, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
-                      className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08] drop-shadow-md"
+                      className="font-serif text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08] drop-shadow-md"
                     >
                       {currentSlide.line1}
                     </motion.h1>
@@ -159,7 +159,7 @@ export default function HeroSection({ onEnquire }) {
                       animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                       exit={{ opacity: 0, y: -18, filter: 'blur(6px)' }}
                       transition={{ duration: 0.85, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
-                      className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#EFCA74] leading-[1.08] drop-shadow-md"
+                      className="font-serif text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-[#EFCA74] leading-[1.08] drop-shadow-md"
                     >
                       {currentSlide.line2}
                     </motion.h1>

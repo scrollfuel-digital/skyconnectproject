@@ -81,18 +81,18 @@ export default function AboutSection({ onEnquire }) {
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 pt-1">
-            <div className="bg-white p-3.5 border border-stone-300 shadow-sm text-center">
-              <span className="font-serif text-base sm:text-lg font-bold text-[#966042] block">3 BHK</span>
-              <span className="font-sans text-[10px] sm:text-xs text-slate-800 uppercase tracking-wider block mt-0.5 font-medium">Luxury Living</span>
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-1">
+            <div className="bg-white p-2.5 sm:p-3.5 border border-stone-300 shadow-sm text-center">
+              <span className="font-serif text-sm sm:text-lg font-bold text-[#966042] block">3 BHK</span>
+              <span className="font-sans text-[9px] sm:text-xs text-slate-800 uppercase tracking-wider block mt-0.5 font-medium">Luxury Living</span>
             </div>
-            <div className="bg-white p-3.5 border border-stone-300 shadow-sm text-center">
-              <span className="font-serif text-base sm:text-lg font-bold text-[#966042] block">Prime</span>
-              <span className="font-sans text-[10px] sm:text-xs text-slate-800 uppercase tracking-wider block mt-0.5 font-medium">Jaiprakash Nagar</span>
+            <div className="bg-white p-2.5 sm:p-3.5 border border-stone-300 shadow-sm text-center">
+              <span className="font-serif text-sm sm:text-lg font-bold text-[#966042] block">Prime</span>
+              <span className="font-sans text-[9px] sm:text-xs text-slate-800 uppercase tracking-wider block mt-0.5 font-medium">Jaiprakash Nagar</span>
             </div>
-            <div className="bg-white p-3.5 border border-stone-300 shadow-sm text-center">
-              <span className="font-serif text-base sm:text-lg font-bold text-[#966042] block">100%</span>
-              <span className="font-sans text-[10px] sm:text-xs text-slate-800 uppercase tracking-wider block mt-0.5 font-medium">Vastu Compliant</span>
+            <div className="bg-white p-2.5 sm:p-3.5 border border-stone-300 shadow-sm text-center">
+              <span className="font-serif text-sm sm:text-lg font-bold text-[#966042] block">100%</span>
+              <span className="font-sans text-[9px] sm:text-xs text-slate-800 uppercase tracking-wider block mt-0.5 font-medium">Vastu Compliant</span>
             </div>
           </div>
 

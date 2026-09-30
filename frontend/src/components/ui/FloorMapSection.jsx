@@ -66,7 +66,7 @@ export default function FloorMapSection({ onEnquire, children }) {
             opacity: specificationsOpacity,
             pointerEvents: specificationsPointerEvents
           }}
-          className="absolute inset-0 w-full h-full z-0 flex items-center justify-center bg-[#FAF8F5] border-t border-stone-200 overflow-y-auto lg:overflow-hidden"
+          className="absolute inset-0 w-full h-full z-0 flex items-start lg:items-center justify-center py-6 sm:py-10 bg-[#FAF8F5] border-t border-stone-200 overflow-y-auto lg:overflow-hidden"
         >
           {children}
         </motion.div>
@@ -105,12 +105,12 @@ export default function FloorMapSection({ onEnquire, children }) {
 
                 <div
                   onClick={() => openLightboxWithTab('2d')}
-                  className="relative flex-1 mt-4 sm:mt-6 border border-stone-300/80 p-0 flex items-center justify-center cursor-zoom-in group/inner overflow-hidden rounded-xl shadow-md"
+                  className="relative flex-1 mt-4 sm:mt-6 border border-stone-300/80 p-2 bg-white flex items-center justify-center cursor-zoom-in group/inner overflow-hidden rounded-xl shadow-md"
                 >
                   <img
                     src={floorMapImg}
                     alt="Sky Connect 3 BHK Architecture Plan"
-                    className="w-full h-full object-cover group-hover/inner:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain group-hover/inner:scale-105 transition-transform duration-500"
                   />
                   
                   <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-xs px-2.5 py-1 border border-stone-300 flex items-center gap-1.5 font-mono text-[10px] text-slate-700 shadow-sm pointer-events-none">
@@ -140,12 +140,12 @@ export default function FloorMapSection({ onEnquire, children }) {
 
                 <div
                   onClick={() => openLightboxWithTab('3d')}
-                  className="relative flex-1 mt-4 sm:mt-6 border border-stone-300/80 p-0 flex items-center justify-center cursor-zoom-in group/inner overflow-hidden rounded-xl shadow-md"
+                  className="relative flex-1 mt-4 sm:mt-6 border border-stone-300/80 p-2 bg-white flex items-center justify-center cursor-zoom-in group/inner overflow-hidden rounded-xl shadow-md"
                 >
                   <img
                     src={isometricImg}
                     alt="Sky Connect 3D Isometric View"
-                    className="w-full h-full object-cover group-hover/inner:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain group-hover/inner:scale-105 transition-transform duration-500"
                   />
                   
                   <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-xs px-2.5 py-1 border border-stone-300 flex items-center gap-1.5 font-mono text-[10px] text-slate-700 shadow-sm pointer-events-none">
