@@ -220,10 +220,15 @@ export default function Navbar() {
                     <MapPin className="w-4 h-4 text-[#EFCA74]" />
                     <span>Jaiprakash Nagar, Nagpur</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <a
+                    href="https://wa.me/918989666888"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-[#EFCA74] transition-colors"
+                  >
                     <Phone className="w-4 h-4 text-[#EFCA74]" />
                     <span>+91 8989-666-888</span>
-                  </div>
+                  </a>
                 </div>
               </div>
             </motion.div>

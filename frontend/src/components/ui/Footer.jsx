@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom'
 import {
   MapPin,
   ArrowRight,
-  Instagram,
-  Facebook,
-  Linkedin,
-  Youtube
+  Instagram
 } from 'lucide-react'
 import logo from '../../assets/LOGO/SkyConnect Logo.png'
+
+function WhatsAppIcon({ className = "w-4 h-4" }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.099 4.019 4.012-1.052z" />
+    </svg>
+  )
+}
 
 export default function Footer() {
   const quickLinks = [
@@ -49,32 +54,22 @@ export default function Footer() {
 
             <div className="flex items-center gap-2.5 pt-0.5">
               <a
-                href="#"
+                href="https://www.instagram.com/skyconnectnagpur?stkn=b28zcjdvejlwendj"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="w-9 h-9 rounded-full bg-[#EFE9DD] hover:bg-[#966042] text-[#3C2D24] hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs"
               >
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href="#"
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-[#EFE9DD] hover:bg-[#966042] text-[#3C2D24] hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs"
+                href="https://wa.me/918989666888"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="w-9 h-9 rounded-full bg-[#EFE9DD] hover:bg-[#25D366] text-[#3C2D24] hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs"
               >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                aria-label="LinkedIn"
-                className="w-9 h-9 rounded-full bg-[#EFE9DD] hover:bg-[#966042] text-[#3C2D24] hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                aria-label="YouTube"
-                className="w-9 h-9 rounded-full bg-[#EFE9DD] hover:bg-[#966042] text-[#3C2D24] hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs"
-              >
-                <Youtube className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4" />
               </a>
             </div>
           </div>
@@ -130,14 +125,14 @@ export default function Footer() {
                   </h4>
                 </div>
                 <p className="font-sans text-xs text-[#6B5A4E] leading-relaxed">
-                  SkyConnect, Nagpur<br />
-                  Maharashtra, India
+                  7 CROWN, Plot 30–31, Beside Hotel Trance,<br />
+                  Jaiprakash Nagar, Nagpur – 440025
                 </p>
               </div>
 
               {/* Get Directions Button in Yellow Box Area */}
               <a
-                href="https://maps.google.com/?q=Jaiprakash+Nagar+Wardha+Road+Nagpur"
+                href="https://maps.google.com/maps?daddr=7+CROWN,+Plot+30-31,+Beside+Hotel+Trance,+Jaiprakash+Nagar,+Nagpur+-+440025"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group shrink-0 inline-flex items-center gap-2 px-3.5 py-1.5 border border-[#966042] rounded-full text-xs font-serif text-[#966042] hover:bg-[#966042] hover:text-white transition-all duration-300 shadow-xs mt-0.5"
@@ -151,7 +146,7 @@ export default function Footer() {
             <div className="relative w-full max-w-sm h-[145px] sm:h-[155px] rounded-xl overflow-hidden border border-[#966042]/25 shadow-sm bg-stone-200 group">
               <iframe
                 title="SkyConnect Rectangular Footer Map"
-                src="https://maps.google.com/maps?q=Jaiprakash+Nagar,+Wardha+Road,+Nagpur&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=7+CROWN,+Plot+30-31,+Beside+Hotel+Trance,+Jaiprakash+Nagar,+Nagpur+-+440025&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 className="w-full h-full border-0 filter saturate-90 group-hover:scale-105 transition-transform duration-500"
                 allowFullScreen=""
                 loading="lazy"

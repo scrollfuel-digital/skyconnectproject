@@ -199,16 +199,7 @@ export default function FloorMapSection({ onEnquire, children }) {
             </motion.div>
           </div>
 
-          <div className="relative z-20 w-full px-6 sm:px-12 lg:px-16 py-4 flex flex-wrap items-center justify-between gap-4 border-t border-stone-300/80 text-xs font-mono text-slate-600 shrink-0 bg-[#FAF8F5]/95 backdrop-blur-xs">
-            <div className="flex items-center gap-6">
-              <span>CONFIG: 3 BHK LUXURY</span>
-              <span className="hidden sm:inline">•</span>
-              <span className="hidden sm:inline">BALCONIES: 3 PRIVATE DECKS</span>
-              <span className="hidden md:inline">•</span>
-              <span className="hidden md:inline">VASTU: 100% COMPLIANT</span>
-            </div>
-            <span className="text-[#966042] font-semibold">SCROLL DOWN TO ADVANCE ↓</span>
-          </div>
+
 
         </motion.div>
 

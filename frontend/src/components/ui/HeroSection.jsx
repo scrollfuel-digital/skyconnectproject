@@ -1,162 +1,205 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
-import video1 from '../../assets/Header video/Video Project 7.mp4'
-import video2 from '../../assets/Header video/Video Project 6.mp4'
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react'
+import hallImg from '../../assets/Gallery Section/Hall Image.png'
+import bedroomImg from '../../assets/Gallery Section/Bedroom Image.png'
+import kitchenImg from '../../assets/Gallery Section/kitchens Image.png'
 
-export default function HeroSection() {
+export default function HeroSection({ onEnquire }) {
+  const slides = [
+    {
+      id: 'slide-1',
+      title: '3 BHK Family Lounge',
+      badge: 'SPACIOUS LIVING',
+      line1: 'Unmatched Elegance.',
+      line2: '3 BHK Family Lounge.',
+      subtext: 'Expansive drawing and living spaces designed for family gatherings, quiet evenings, and entertaining guests in Jaiprakash Nagar.',
+      image: hallImg,
+    },
+    {
+      id: 'slide-2',
+      title: 'Master Bedroom Suite',
+      badge: 'ENSUITE MASTER SUITE',
+      line1: 'Serene Luxury.',
+      line2: 'Master Suite Balcony.',
+      subtext: 'Serene master bedroom suite designed with elegant finishes, abundant natural light, and a private 16-foot balcony.',
+      image: bedroomImg,
+    },
+    {
+      id: 'slide-3',
+      title: 'Semi-Modular Kitchen',
+      badge: 'SEMI-MODULAR WORKSPACE',
+      line1: 'Thoughtful Design.',
+      line2: 'Modular Kitchen Deck.',
+      subtext: 'Modern kitchen workspace fitted with premium granite platforms, ample storage, and private utility balcony.',
+      image: kitchenImg,
+    },
+  ]
+
   const [currentIndex, setCurrentIndex] = useState(0)
-  const videoRefs = [useRef(null), useRef(null)]
-  const videos = [video1, video2]
+  const currentSlide = slides[currentIndex]
 
-  const scrollToContent = () => {
-    const el = document.getElementById('main-content')
+  // Continuous auto transition every 5.5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % slides.length)
+    }, 5500)
+
+    return () => clearInterval(timer)
+  }, [])
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % slides.length)
+  }
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length)
+  }
+
+  const scrollToGallery = () => {
+    const el = document.getElementById('gallery')
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
+    } else if (onEnquire) {
+      onEnquire('Explore Sky Connect Residences')
     }
-  }
-
-  const handleVideoEnd = (index) => {
-    if (index === currentIndex) {
-      const nextIndex = (currentIndex + 1) % videos.length
-      setCurrentIndex(nextIndex)
-    }
-  }
-
-  useEffect(() => {
-    const activeVideo = videoRefs[currentIndex].current
-    if (activeVideo) {
-      activeVideo.currentTime = 0
-      activeVideo.play().catch(() => {})
-    }
-  }, [currentIndex])
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.18,
-        delayChildren: 0.25,
-      },
-    },
-  }
-
-  const textItemVariants = {
-    hidden: { opacity: 0, y: 35, filter: 'blur(6px)' },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        duration: 1.1,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  }
-
-  const buttonVariants = {
-    hidden: { opacity: 0, y: 25, scale: 0.96 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.9,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
   }
 
   return (
-    <section id="hero" className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#0A0A0A] text-white select-none">
-      
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        {videos.map((src, idx) => {
-          const isActive = idx === currentIndex
-          return (
-            <video
-              key={idx}
-              ref={videoRefs[idx]}
-              src={src}
-              muted
-              playsInline
-              onEnded={() => handleVideoEnd(idx)}
-              className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1400ms] ease-in-out transform ${
-                isActive
-                  ? 'opacity-100 scale-100'
-                  : 'opacity-0 scale-105 pointer-events-none'
-              }`}
+    <section
+      id="hero"
+      className="relative w-full h-screen min-h-[680px] overflow-hidden bg-[#0A0A0A] text-white select-none"
+    >
+      {/* BACKGROUND IMAGE SLIDESHOW WITH SILKY SMOOTH CROSS-DISSOLVE & KEN BURNS */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={currentSlide.id}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1.0 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 1.4, ease: [0.25, 1, 0.5, 1] }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <motion.img
+              src={currentSlide.image}
+              alt={currentSlide.title}
+              initial={{ scale: 1.0 }}
+              animate={{ scale: 1.06 }}
+              transition={{ duration: 5.5, ease: 'easeInOut' }}
+              className="w-full h-full object-cover"
             />
-          )
-        })}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/15 to-transparent pointer-events-none z-[5]" />
+      {/* SOFT GRADIENT OVERLAYS */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent pointer-events-none z-[5]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/40 pointer-events-none z-[5]" />
 
-      <motion.div
-        key="hero-text-content"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="absolute bottom-20 left-6 sm:bottom-28 sm:left-12 lg:bottom-32 lg:left-20 xl:left-24 z-10 max-w-xl sm:max-w-2xl text-left space-y-4 sm:space-y-6"
+      {/* LEFT ARROW BUTTON (SCREEN EDGE) */}
+      <button
+        onClick={handlePrev}
+        aria-label="Previous Slide"
+        className="absolute left-3 sm:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/40 border border-white/25 text-white hover:border-[#EFCA74] hover:text-[#EFCA74] hover:bg-black/75 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-2xl cursor-pointer group"
       >
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 group-hover:-translate-x-0.5 transition-transform" />
+      </button>
+
+      {/* RIGHT ARROW BUTTON (SCREEN EDGE) */}
+      <button
+        onClick={handleNext}
+        aria-label="Next Slide"
+        className="absolute right-3 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/40 border border-white/25 text-white hover:border-[#EFCA74] hover:text-[#EFCA74] hover:bg-black/75 backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-2xl cursor-pointer group"
+      >
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-0.5 transition-transform" />
+      </button>
+
+      {/* HERO MAIN CONTAINER */}
+      <div className="relative z-10 max-w-7xl mx-auto h-full px-12 sm:px-16 lg:px-20 flex flex-col justify-center pt-28 pb-12">
         
-        <div className="overflow-hidden">
-          <motion.h1
-            variants={textItemVariants}
-            className="font-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.08]"
-          >
-            <span className="text-white inline-block">
-              Your Home
-            </span>
-            <span className="italic font-semibold block text-[#EFCA74] mt-1">Nagpur.</span>
-          </motion.h1>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* LEFT CONTENT AREA */}
+          <div className="lg:col-span-10 xl:col-span-9 space-y-5 sm:space-y-6">
+            
+            <AnimatePresence mode="wait">
+              <motion.div key={currentSlide.id} className="space-y-4">
+                
+                {/* Badge Tag */}
+                <div className="overflow-hidden">
+                  <motion.div
+                    initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+                    transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+                    className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/60 border border-[#EFCA74]/70 backdrop-blur-md text-[#EFCA74] font-mono text-[11px] uppercase tracking-[0.2em] shadow-lg"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-[#EFCA74]" />
+                    <span>{currentSlide.badge}</span>
+                  </motion.div>
+                </div>
+
+                {/* Staggered Headline */}
+                <div className="space-y-1 overflow-hidden drop-shadow-md">
+                  <div className="overflow-hidden">
+                    <motion.h1
+                      initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
+                      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, y: -18, filter: 'blur(6px)' }}
+                      transition={{ duration: 0.85, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
+                      className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08] drop-shadow-md"
+                    >
+                      {currentSlide.line1}
+                    </motion.h1>
+                  </div>
+                  <div className="overflow-hidden">
+                    <motion.h1
+                      initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
+                      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, y: -18, filter: 'blur(6px)' }}
+                      transition={{ duration: 0.85, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
+                      className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#EFCA74] leading-[1.08] drop-shadow-md"
+                    >
+                      {currentSlide.line2}
+                    </motion.h1>
+                  </div>
+                </div>
+
+                {/* Narrative Subtext */}
+                <div className="overflow-hidden max-w-xl pt-1">
+                  <motion.p
+                    initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -12, filter: 'blur(4px)' }}
+                    transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                    className="font-sans text-sm sm:text-base lg:text-lg text-stone-100 leading-relaxed font-normal drop-shadow-sm"
+                  >
+                    {currentSlide.subtext}
+                  </motion.p>
+                </div>
+
+              </motion.div>
+            </AnimatePresence>
+
+            {/* CTA Buttons */}
+            <div className="pt-2 flex flex-wrap items-center gap-4">
+              <motion.button
+                onClick={scrollToGallery}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="relative overflow-hidden group px-7 py-3.5 sm:px-8 sm:py-4 bg-[#18181B] text-white font-mono text-xs sm:text-sm font-bold tracking-[0.18em] uppercase cursor-pointer inline-flex items-center gap-3 border border-[#EFCA74]/70 hover:bg-[#966042] transition-all duration-300 shadow-2xl"
+              >
+                <span>EXPLORE RESIDENCES</span>
+                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+            </div>
+
+          </div>
+
         </div>
 
-        <div className="overflow-hidden">
-          <motion.p
-            variants={textItemVariants}
-            className="font-sans text-sm sm:text-base lg:text-lg text-black font-normal leading-relaxed max-w-xl"
-          >
-            Thoughtfully planned residential homes with contemporary architecture, luxury amenities, and unmatched connectivity in Jaiprakash Nagar.
-          </motion.p>
-        </div>
-
-        <motion.div variants={buttonVariants} className="pt-2">
-          <motion.button
-            onClick={scrollToContent}
-            whileHover={{ scale: 1.04, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-            className="relative overflow-hidden group px-7 py-3.5 sm:px-8 sm:py-4 bg-white text-slate-900 font-mono text-xs sm:text-sm font-bold tracking-[0.15em] uppercase cursor-pointer flex items-center gap-3 border border-[#EFCA74] hover:border-[#EFCA74] shadow-2xl hover:shadow-[0_12px_35px_rgba(239,202,116,0.45)] transition-all duration-300"
-          >
-            <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/80 to-transparent -translate-x-full pointer-events-none animate-btn-shine" />
-            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#FAF8F5] via-[#FFFDF8] to-[#FAF8F5] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-            <span className="relative z-10 text-slate-900 group-hover:text-[#966042] transition-colors duration-300">
-              Explore Sky Connect
-            </span>
-            <ArrowRight className="relative z-10 w-4 h-4 text-slate-900 group-hover:text-[#966042] group-hover:translate-x-2 transition-all duration-300" />
-          </motion.button>
-        </motion.div>
-
-        <motion.div variants={buttonVariants} className="flex items-center gap-2 pt-2">
-          {videos.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentIndex(idx)}
-              aria-label={`Slide ${idx + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${
-                idx === currentIndex
-                  ? 'w-8 bg-[#EFCA74]'
-                  : 'w-2 bg-white/40 hover:bg-white/70'
-              }`}
-            />
-          ))}
-        </motion.div>
-
-      </motion.div>
+      </div>
     </section>
   )
 }

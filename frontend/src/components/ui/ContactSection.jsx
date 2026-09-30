@@ -31,7 +31,7 @@ export default function ContactSection() {
               
               <h2 className="font-serif text-4xl sm:text-6xl font-bold text-slate-900 leading-[1.1] tracking-tight">
                 Your next address <br className="hidden sm:inline" />
-                <span className="italic font-bold">starts here.</span>
+                <span className="font-bold">Starts here.</span>
               </h2>
 
               <p className="font-sans text-sm sm:text-base text-slate-700 leading-relaxed font-normal">

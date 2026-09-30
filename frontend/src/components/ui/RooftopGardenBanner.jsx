@@ -26,7 +26,7 @@ export default function RooftopGardenBanner() {
       id="rooftop-banner"
       className="relative w-full h-[450px] sm:h-[550px] lg:h-[640px] overflow-hidden bg-stone-900 group select-none border-y border-stone-300/80"
     >
-      {/* Background Video Player (Exact Header Videos) */}
+      {/* Background Video Player */}
       <video
         key={currentIndex}
         ref={videoRef}
@@ -42,13 +42,14 @@ export default function RooftopGardenBanner() {
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 pointer-events-none z-[5]" />
 
+      {/* ONLY Text: LUXURY ARCHITECTURE - Elevated Modern Living */}
       <div className="absolute bottom-8 left-6 sm:bottom-12 sm:left-12 lg:bottom-16 lg:left-20 z-10 max-w-xl text-left space-y-2 pointer-events-none">
         <span className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] text-[#EFCA74] uppercase block">
-          ROOFTOP GARDEN
+          LUXURY ARCHITECTURE
         </span>
         <h2 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.08] tracking-tight drop-shadow-lg">
-          Panoramic <br />
-          <span className="italic font-semibold">Sky Decks.</span>
+          Elevated <br />
+          <span className="font-bold">Modern Living.</span>
         </h2>
       </div>
 

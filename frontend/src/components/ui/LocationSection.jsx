@@ -1,296 +1,217 @@
 import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import {
-  MapPin,
-  Plane,
-  Train,
-  Building2,
-  ShoppingBag,
-  Hotel,
-  Navigation,
-  ExternalLink,
-  Clock
-} from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
+import './LocationMap.css'
 
-const destinations = [
+const SKYCONNECT = { lat: 21.099812242389685, lng: 79.06337550973734 }
+const SKYCONNECT_ADDRESS = 'SkyConnect, Wardha Road, Jaiprakash Nagar, Nagpur – 440025'
+
+const locations = [
+  {
+    id: 'westside',
+    name: 'Westside',
+    shortName: 'Westside',
+    time: '3 min',
+    category: 'Shopping',
+    symbol: 'S',
+    color: '#b9935a',
+    lat: 21.10422201975818,
+    lng: 79.06760458459217,
+    address: 'Wardha Road, Jaiprakash Nagar, Nagpur',
+    description: 'Premier fashion and lifestyle retail destination close to SkyConnect.',
+  },
   {
     id: 'jp-metro',
-    name: 'Metro Station (Jaiprakash Nagar)',
+    name: 'Jaiprakash Nagar Metro',
     shortName: 'Jaiprakash Nagar Metro',
-    time: '3 Min',
+    time: '3 min',
     category: 'Transit',
-    icon: Train,
-    mapQuery: 'Jaiprakash+Nagar+Metro+Station+Wardha+Road+Nagpur',
-    description: 'Direct Aqua Line metro station outside project connecting Sitabuldi & Airport.'
+    symbol: 'M',
+    color: '#8f6e3b',
+    lat: 21.104301344043012,
+    lng: 79.06816854474287,
+    address: 'Wardha Road, Jaiprakash Nagar, Nagpur',
+    description: 'Aqua Line metro station connecting central Nagpur and the airport.',
   },
   {
     id: 'ginger-hotel',
     name: 'Ginger Hotel',
     shortName: 'Ginger Hotel',
-    time: '2 Min',
+    time: '3 min',
     category: 'Hotels',
-    icon: Hotel,
-    mapQuery: 'Ginger+Hotel+Wardha+Road+Nagpur',
-    description: 'Premier business hotel located right along the Wardha Road commercial hub.'
+    symbol: 'H',
+    color: '#b9935a',
+    lat: 21.10415175415001,
+    lng: 79.06707455737059,
+    address: 'Wardha Road, Jaiprakash Nagar, Nagpur',
+    description: 'Convenient business hotel along the Wardha Road commercial corridor.',
   },
   {
-    id: 'trends-westside',
-    name: 'Trends & Westside Mall',
-    shortName: 'Trends & Westside',
-    time: '2 Min',
+    id: 'trends',
+    name: 'Trends Shopping',
+    shortName: 'Trends',
+    time: '3 min',
     category: 'Shopping',
-    icon: ShoppingBag,
-    mapQuery: 'Trends+Westside+Wardha+Road+Nagpur',
-    description: 'High-street fashion & lifestyle retail stores within 2 minutes walk.'
+    symbol: 'S',
+    color: '#8f6e3b',
+    lat: 21.104909758681863,
+    lng: 79.06799736059254,
+    address: 'Wardha Road, Jaiprakash Nagar, Nagpur',
+    description: 'Popular fashion shopping store located right on Wardha Road.',
   },
   {
-    id: 'chatrapati-sq',
-    name: 'Chatrapati Square',
-    shortName: 'Chatrapati Square',
-    time: '2 Min',
+    id: 'chhatrapati-sq',
+    name: 'Chhatrapati Square',
+    shortName: 'Chhatrapati Square',
+    time: '5 min',
     category: 'Landmark',
-    icon: Building2,
-    mapQuery: 'Chatrapati+Square+Wardha+Road+Nagpur',
-    description: 'Major arterial junction connecting Ring Road and Wardha Road.'
+    symbol: 'L',
+    color: '#b9935a',
+    lat: 21.110802647394806,
+    lng: 79.07007707916647,
+    address: 'Ring Road Junction, Wardha Road, Nagpur',
+    description: 'A major landmark junction connecting Ring Road and Wardha Road.',
   },
   {
-    id: 'hotel-pride',
-    name: 'Pride Hotel & Banquet',
+    id: 'pride-hotel',
+    name: 'Pride Hotel',
     shortName: 'Pride Hotel',
-    time: '3 Min',
+    time: '5 min',
     category: 'Hotels',
-    icon: Hotel,
-    mapQuery: 'The+Pride+Hotel+Nagpur+Wardha+Road',
-    description: '4-Star luxury hotel and banquet venue near airport corridor.'
+    symbol: 'H',
+    color: '#8f6e3b',
+    lat: 21.087178305075383,
+    lng: 79.06435199380438,
+    address: 'Wardha Road, Sonegaon, Nagpur',
+    description: 'Luxury hotel and banquet venue near the airport corridor.',
   },
   {
     id: 'radisson',
-    name: 'Radisson Blu 5-Star Hotel',
+    name: 'Radisson Blu Hotel',
     shortName: 'Radisson Blu',
-    time: '4 Min',
+    time: '4 min',
     category: 'Hotels',
-    icon: Hotel,
-    mapQuery: 'Radisson+Blu+Hotel+Nagpur',
-    description: '5-Star luxury hotel, dining, and convention center.'
+    symbol: 'H',
+    color: '#b9935a',
+    lat: 21.106016153382154,
+    lng: 79.06964423796536,
+    address: 'Wardha Road, Vivekanand Nagar, Nagpur',
+    description: '5-star hotel, fine dining, and convention facilities.',
   },
   {
     id: 'airport',
-    name: 'International Airport',
+    name: 'Airport',
     shortName: 'Nagpur Airport',
-    time: '5 Min',
+    time: '5 min',
     category: 'Transit',
-    icon: Plane,
-    mapQuery: 'Dr+Babasaheb+Ambedkar+International+Airport+Nagpur',
-    description: 'Dr. Babasaheb Ambedkar International Airport offering domestic & international flights.'
-  }
+    symbol: 'A',
+    color: '#8f6e3b',
+    lat: 21.09038711427662,
+    lng: 79.05480859563654,
+    address: 'Sonegaon, Nagpur',
+    description: 'Dr. Babasaheb Ambedkar International Airport.',
+  },
 ]
 
-const categories = ['All', 'Transit', 'Hotels', 'Shopping', 'Landmark']
-
 export default function LocationSection() {
-  const [activeCategory, setActiveCategory] = useState('All')
-  const [selectedDest, setSelectedDest] = useState(destinations[0])
-  const [mapType, setMapType] = useState('roadmap')
+  const [selectedLocation, setSelectedLocation] = useState(locations[0])
 
-  const filteredDestinations = activeCategory === 'All'
-    ? destinations
-    : destinations.filter(d => d.category === activeCategory)
+  const originQuery = encodeURIComponent('Hotel Trance, Wardha Road, Jaiprakash Nagar, Nagpur')
+  const destQuery = selectedLocation ? `${selectedLocation.lat},${selectedLocation.lng}` : `${SKYCONNECT.lat},${SKYCONNECT.lng}`
 
-  const query = selectedDest?.mapQuery || 'Jaiprakash+Nagar+Wardha+Road+Nagpur'
+  const googleMapEmbedUrl = `https://maps.google.com/maps?saddr=${originQuery}&daddr=${destQuery}&z=15&t=&ie=UTF8&output=embed`
 
-  const mapEmbedUrl = mapType === 'satellite'
-    ? `https://maps.google.com/maps?q=${query}&t=k&z=16&ie=UTF8&iwloc=&output=embed`
-    : `https://maps.google.com/maps?q=${query}&t=&z=15&ie=UTF8&iwloc=&output=embed`
+  const directionsExternalUrl = selectedLocation
+    ? `https://www.google.com/maps/dir/?api=1&origin=${originQuery}&destination=${selectedLocation.lat},${selectedLocation.lng}`
+    : `https://www.google.com/maps/dir/?api=1&origin=${originQuery}&destination=${destQuery}`
 
   return (
-    <section id="location" className="py-16 sm:py-24 bg-[#FAF8F5] text-slate-900 relative overflow-hidden border-t border-stone-300/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <main id="location" className="location-section">
+      <div className="location-container">
         
         {/* SECTION HEADER */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mb-10 sm:mb-12 items-end border-b border-stone-300/80 pb-8">
-          <div className="lg:col-span-8 space-y-3">
-            <span className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] text-[#966042] uppercase block">
-              CONNECTIVITY & LOCATION
-            </span>
-            <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.08] tracking-tight">
-              Prime Jaiprakash Nagar Address
-            </h2>
-            <p className="font-sans text-sm sm:text-base text-slate-800 font-normal leading-relaxed max-w-2xl">
-              Strategically positioned along Wardha Road with direct metro access, high-street retail, and 5 minutes to Nagpur International Airport.
+        <header className="location-heading flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Connectivity & Location</p>
+            <h1>Everything Around You</h1>
+            <p className="intro">
+              Explore nearby hubs and directions starting directly from <strong>SkyConnect, Wardha Road, Jaiprakash Nagar, Nagpur</strong>.
             </p>
           </div>
 
-          <div className="lg:col-span-4 flex justify-start lg:justify-end">
+          <div className="shrink-0">
             <a
-              href={`https://maps.google.com/?q=${query}`}
+              href={directionsExternalUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group cursor-pointer inline-flex items-center gap-3 px-6 py-3.5 bg-[#966042] text-white hover:bg-[#0F1E36] font-mono text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 shadow-md rounded-none"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#966042] text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#0F1E36] transition-colors shadow-sm"
             >
               <span>GET DIRECTIONS</span>
-              <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ExternalLink className="w-4 h-4" />
             </a>
           </div>
-        </div>
+        </header>
 
-        {/* MAIN 2-COLUMN GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+        {/* MAIN LAYOUT GRID */}
+        <div className="location-layout">
           
-          {/* LEFT COLUMN: Interactive Google Map */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
-            <div className="bg-white p-3 border border-stone-300 flex items-center justify-between shadow-xs">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#966042]" />
-                <span className="font-mono text-xs font-bold text-slate-900 uppercase tracking-wider">
-                  Sky Connect • {selectedDest?.shortName || 'Jaiprakash Nagar'}
-                </span>
+          {/* SIDEBAR NEARBY LOCATIONS LIST */}
+          <aside className="nearby-panel" aria-label="Nearby destinations">
+            <div className="nearby-heading">
+              <div>
+                <span className="eyebrow">Explore the neighbourhood</span>
+                <h2>Nearby places</h2>
               </div>
-
-              <div className="flex items-center bg-stone-100 p-1 border border-stone-200">
-                <button
-                  onClick={() => setMapType('roadmap')}
-                  className={`px-3 py-1 text-[11px] font-mono font-bold transition-colors cursor-pointer ${
-                    mapType === 'roadmap'
-                      ? 'bg-[#18181B] text-[#EFCA74]'
-                      : 'text-slate-600 hover:text-black'
-                  }`}
-                >
-                  Road Map
-                </button>
-                <button
-                  onClick={() => setMapType('satellite')}
-                  className={`px-3 py-1 text-[11px] font-mono font-bold transition-colors cursor-pointer ${
-                    mapType === 'satellite'
-                      ? 'bg-[#18181B] text-[#EFCA74]'
-                      : 'text-slate-600 hover:text-black'
-                  }`}
-                >
-                  Satellite
-                </button>
-              </div>
+              <span className="place-count">{locations.length} places</span>
             </div>
 
-            <div className="relative w-full h-[380px] sm:h-[460px] lg:h-[500px] bg-stone-200 border border-stone-300 shadow-xl overflow-hidden group">
+            <div className="place-list">
+              {locations.map((location) => {
+                const active = selectedLocation?.id === location.id
+                return (
+                  <button
+                    type="button"
+                    key={location.id}
+                    className={`place-item${active ? ' is-active' : ''}`}
+                    onClick={() => setSelectedLocation(location)}
+                    aria-pressed={active}
+                  >
+                    <span className="place-symbol" style={{ '--place-color': location.color }}>{location.symbol}</span>
+                    <span className="place-copy">
+                      <span className="place-title-row">
+                        <span className="place-name">{location.shortName}</span>
+                        <span className="place-time">{location.time}</span>
+                      </span>
+                      <span className="place-address">{location.address}</span>
+                    </span>
+                    <span className="place-chevron" aria-hidden="true">›</span>
+                  </button>
+                )
+              })}
+            </div>
+
+            <div className="origin-note">
+              <span className="origin-dot" /> Routes start at <strong>SkyConnect</strong>
+            </div>
+          </aside>
+
+          {/* MAIN MAP PANEL - GOOGLE MAP IFRAME ONLY */}
+          <section className="map-panel" aria-label="Neighbourhood map">
+            <div className="relative w-full h-full min-h-[440px] bg-stone-200">
               <iframe
-                key={selectedDest?.id + mapType}
-                title={`Sky Connect Map - ${selectedDest?.name}`}
-                src={mapEmbedUrl}
+                key={selectedLocation?.id}
+                title={`SkyConnect Google Map - ${selectedLocation?.name}`}
+                src={googleMapEmbedUrl}
                 className="w-full h-full border-0 filter saturate-[0.95]"
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-
-              <div className="absolute bottom-4 left-4 right-4 sm:right-auto bg-[#18181B]/95 backdrop-blur-md text-white p-3.5 border border-[#EFCA74]/40 shadow-2xl flex items-center gap-3">
-                <Navigation className="w-5 h-5 text-[#EFCA74] shrink-0" />
-                <div>
-                  <span className="font-mono text-[10px] text-[#EFCA74] font-bold uppercase tracking-widest block">
-                    LOCATION HIGHLIGHT • {selectedDest?.time} AWAY
-                  </span>
-                  <p className="font-serif text-xs sm:text-sm text-stone-200 mt-0.5 font-semibold">
-                    {selectedDest?.name}
-                  </p>
-                </div>
-              </div>
             </div>
-          </div>
-
-          {/* RIGHT COLUMN: Sleek Executive Destination Breakdown */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-4 h-full">
-            
-            {/* Header & Category Filter Pills */}
-            <div className="space-y-3 shrink-0">
-              <div className="flex items-center justify-between">
-                <h3 className="font-mono text-xs font-bold text-[#966042] tracking-[0.25em] uppercase">
-                  DISTANCES THAT CONNECT
-                </h3>
-                <span className="font-mono text-[11px] text-slate-500 font-medium bg-stone-100 px-2.5 py-0.5 rounded-full border border-stone-200">
-                  {filteredDestinations.length} Key Hubs
-                </span>
-              </div>
-
-              {/* Soft Rounded Filter Pills */}
-              <div className="flex items-center gap-2 flex-wrap pt-0.5">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-4 py-1.5 text-xs font-mono font-medium rounded-full transition-all duration-200 cursor-pointer ${
-                      activeCategory === cat
-                        ? 'bg-[#966042] text-white shadow-sm font-semibold'
-                        : 'bg-white text-slate-700 border border-stone-200 hover:border-[#966042] hover:text-[#966042]'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* List of Destinations with Y Scroller aligned with map height */}
-            <div className="space-y-3 max-h-[350px] sm:max-h-[395px] overflow-y-auto pr-2 [scrollbar-width:thin] [scrollbar-color:#966042_transparent]">
-              {filteredDestinations.map((dest) => {
-                const isSelected = selectedDest?.id === dest.id
-                const DestIcon = dest.icon
-
-                return (
-                  <div
-                    key={dest.id}
-                    onClick={() => setSelectedDest(dest)}
-                    className={`p-3.5 rounded-xl border transition-all duration-300 cursor-pointer flex items-center justify-between group ${
-                      isSelected
-                        ? 'bg-white text-slate-900 border-[#966042] shadow-md ring-1 ring-[#966042]/20'
-                        : 'bg-white/90 text-slate-800 border-stone-200/80 hover:border-[#966042]/50 hover:bg-white hover:shadow-sm'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
-                        isSelected
-                          ? 'bg-[#966042] text-white shadow-xs'
-                          : 'bg-[#FAF7F2] text-[#966042] border border-stone-200 group-hover:bg-[#966042] group-hover:text-white'
-                      }`}>
-                        <DestIcon className="w-4 h-4" />
-                      </div>
-                      
-                      <div className="min-w-0">
-                        <h4 className={`font-serif text-sm font-semibold truncate transition-colors ${
-                          isSelected ? 'text-slate-900' : 'text-slate-800 group-hover:text-[#966042]'
-                        }`}>
-                          {dest.shortName}
-                        </h4>
-                        <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider block mt-0.5">
-                          {dest.category}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 shrink-0 ml-3">
-                      <span className={`font-mono text-xs font-bold tracking-wider px-3 py-1 rounded-full transition-all duration-300 ${
-                        isSelected
-                          ? 'bg-[#966042] text-white shadow-xs'
-                          : 'bg-[#FAF7F2] text-[#966042] border border-[#966042]/30 group-hover:bg-[#966042] group-hover:text-white'
-                      }`}>
-                        {dest.time}
-                      </span>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-
-            {/* Strategic Summary Highlight Card */}
-            <div className="p-3.5 bg-white rounded-xl border border-stone-200/90 flex items-start gap-3 shadow-xs shrink-0">
-              <Clock className="w-4 h-4 text-[#966042] shrink-0 mt-0.5" />
-              <p className="font-sans text-xs text-slate-700 leading-relaxed font-normal">
-                <strong className="text-slate-900 font-semibold">Selected Hub:</strong> {selectedDest?.name} ({selectedDest?.time} away). {selectedDest?.description}
-              </p>
-            </div>
-
-          </div>
-
+          </section>
         </div>
 
+        <p className="map-footnote">This is an interactive map; directions start directly from SkyConnect, Jaiprakash Nagar, Nagpur via Google Maps.</p>
       </div>
-    </section>
+    </main>
   )
 }

@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <div className="bg-[#FAF8F5] text-[#18181B] min-h-screen font-sans selection:bg-[#EFCA74] selection:text-[#18181B] relative">
       {/* 1. HERO SECTION */}
-      <HeroSection />
+      <HeroSection onEnquire={openEnquiry} />
 
       {/* MAIN PAGE SCROLL CONTENT */}
       <div className="relative w-full bg-[#FAF8F5]">
@@ -40,11 +40,11 @@ export default function Home() {
           <SpecificationsSection />
         </FloorMapSection>
 
-        {/* 6. CONNECTED LOCATION MAP SECTION */}
-        <LocationSection />
-
-        {/* 7. GALLERY SECTION */}
+        {/* 6. GALLERY SECTION */}
         <GallerySection />
+
+        {/* 7. CONNECTED LOCATION MAP SECTION */}
+        <LocationSection />
 
         {/* 8. CONTACT & INLINE ENQUIRY SECTION */}
         <ContactSection />
