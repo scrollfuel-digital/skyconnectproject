@@ -61,7 +61,7 @@ export default function HeroSection({ onEnquire }) {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
     } else if (onEnquire) {
-      onEnquire('Explore Sky Connect Residences')
+      onEnquire('Explore Skyconnect Residences')
     }
   }
 

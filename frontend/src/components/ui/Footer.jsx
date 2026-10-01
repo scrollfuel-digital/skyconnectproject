@@ -41,7 +41,7 @@ export default function Footer() {
             <Link to="/" className="inline-block group">
               <img
                 src={logo}
-                alt="SkyConnect"
+                alt="Skyconnect"
                 className="h-28 sm:h-32 w-auto object-contain filter contrast-125 transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
@@ -145,7 +145,7 @@ export default function Footer() {
             {/* Expanded Size Rectangular Map */}
             <div className="relative w-full max-w-sm h-[145px] sm:h-[155px] rounded-xl overflow-hidden border border-[#966042]/25 shadow-sm bg-stone-200 group">
               <iframe
-                title="SkyConnect Rectangular Footer Map"
+                title="Skyconnect Rectangular Footer Map"
                 src="https://maps.google.com/maps?q=7+CROWN,+Plot+30-31,+Beside+Hotel+Trance,+Jaiprakash+Nagar,+Nagpur+-+440025&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 className="w-full h-full border-0 filter saturate-90 group-hover:scale-105 transition-transform duration-500"
                 allowFullScreen=""
@@ -161,7 +161,7 @@ export default function Footer() {
 
         <div className="pt-5 border-t border-[#E5DEC9] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-[#6B5A4E]">
           <div>
-            © {new Date().getFullYear()} Sky Connect. All rights reserved.
+            © {new Date().getFullYear()} Skyconnect. All rights reserved.
           </div>
 
           <div className="flex items-center gap-6 font-sans">

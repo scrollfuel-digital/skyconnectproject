@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
-import frontViewImg from '../../assets/About section/FrontView.png'
-import backViewImg from '../../assets/About section/Back view.png'
+import { ArrowRight, RefreshCw } from 'lucide-react'
+import frontViewImg from '../../assets/About section/frontView.jpg'
+import backViewImg from '../../assets/About section/backView.jpg'
 
 export default function AboutSection({ onEnquire }) {
   const [isFlipped, setIsFlipped] = useState(false)
@@ -22,13 +22,13 @@ export default function AboutSection({ onEnquire }) {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="lg:col-span-6 order-2 lg:order-1 h-full min-h-[450px] sm:min-h-[580px] lg:min-h-[680px] xl:min-h-[760px] flex"
+          className="lg:col-span-6 order-2 lg:order-1 h-full min-h-[480px] sm:min-h-[580px] lg:min-h-[680px] xl:min-h-[760px] flex"
         >
           <div
             onClick={() => setIsFlipped(prev => !prev)}
             className="relative w-full h-full bg-[#FAF8F5] select-none cursor-pointer group"
             style={{ perspective: '1600px' }}
-            title="Click image to turn page & view aerial perspective"
+            title="Click image to turn page & view architectural perspective"
           >
             <motion.div
               animate={{ rotateY: isFlipped ? 180 : 0 }}
@@ -38,23 +38,23 @@ export default function AboutSection({ onEnquire }) {
             >
               <div
                 style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-                className="absolute inset-0 w-full h-full overflow-hidden bg-[#FAF8F5] flex items-center justify-center p-6 sm:p-8 lg:p-12"
+                className="absolute inset-0 w-full h-full overflow-hidden bg-[#FAF8F5] p-3 sm:p-5 lg:p-8 flex items-center justify-center"
               >
                 <img
                   src={frontViewImg}
-                  alt="Sky Connect 7 Crown Front Elevation View"
-                  className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  alt="Skyconnect 7 Crown Front Elevation View"
+                  className="w-full h-full object-contain object-center rounded-xl shadow-xl group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                 />
               </div>
 
               <div
                 style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-                className="absolute inset-0 w-full h-full overflow-hidden bg-[#FAF8F5] flex items-center justify-center p-6 sm:p-8 lg:p-12"
+                className="absolute inset-0 w-full h-full overflow-hidden bg-[#FAF8F5] p-3 sm:p-5 lg:p-8 flex items-center justify-center"
               >
                 <img
                   src={backViewImg}
-                  alt="Sky Connect 7 Crown Back Architectural View"
-                  className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  alt="Skyconnect 7 Crown Architectural View"
+                  className="w-full h-full object-contain object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                 />
               </div>
             </motion.div>
@@ -73,7 +73,7 @@ export default function AboutSection({ onEnquire }) {
 
           <div className="space-y-4 max-w-xl">
             <p className="font-sans text-sm sm:text-base text-slate-800 font-normal leading-relaxed">
-              Designed for those who appreciate refined living, Sky Connect brings together contemporary architecture, meticulous engineering, and serene surroundings in the heart of Nagpur.
+              Designed for those who appreciate refined living, Skyconnect brings together contemporary architecture, meticulous engineering, and serene surroundings in the heart of Nagpur.
             </p>
 
             <p className="font-sans text-sm sm:text-base text-slate-800 font-normal leading-relaxed">
@@ -98,10 +98,10 @@ export default function AboutSection({ onEnquire }) {
 
           <div className="pt-3">
             <button
-              onClick={() => onEnquire?.("Explore Sky Connect")}
+              onClick={() => onEnquire?.("Explore Skyconnect")}
               className="group cursor-pointer inline-flex items-center gap-3 border-b-2 border-slate-900 pb-1.5 font-mono text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-slate-900 hover:text-[#966042] hover:border-[#966042] transition-colors"
             >
-              <span>EXPLORE SKY CONNECT</span>
+              <span>EXPLORE SKYCONNECT</span>
               <ArrowRight className="w-4 h-4 text-slate-900 group-hover:text-[#966042] group-hover:translate-x-1.5 transition-all" />
             </button>
           </div>

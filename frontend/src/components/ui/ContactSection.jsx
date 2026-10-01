@@ -35,7 +35,7 @@ export default function ContactSection() {
               </h2>
 
               <p className="font-sans text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
-                Schedule an exclusive private site visit or send your enquiry to discover luxury 3 BHK residences at Sky Connect, Jaiprakash Nagar, Nagpur.
+                Schedule an exclusive private site visit or send your enquiry to discover luxury 3 BHK residences at Skyconnect, Jaiprakash Nagar, Nagpur.
               </p>
 
               <div className="pt-2">

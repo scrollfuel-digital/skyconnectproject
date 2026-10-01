@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   MapPin,
@@ -17,6 +17,7 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home')
   const [hoveredNav, setHoveredNav] = useState(null)
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => {
@@ -34,6 +35,10 @@ export default function Navbar() {
         } else {
           setActiveSection('home')
         }
+      } else if (location.pathname.startsWith('/project')) {
+        setActiveSection('project')
+      } else if (location.pathname.startsWith('/blog') || location.pathname.startsWith('/journal') || location.pathname.includes('buying-a-flat')) {
+        setActiveSection('blog')
       }
     }
 
@@ -45,6 +50,8 @@ export default function Navbar() {
   }, [location.pathname])
 
   const getActiveNavId = () => {
+    if (location.pathname.startsWith('/project')) return 'project'
+    if (location.pathname.startsWith('/blog') || location.pathname.startsWith('/journal') || location.pathname.includes('buying-a-flat')) return 'blog'
     if (activeSection) return activeSection
     return 'home'
   }
@@ -53,21 +60,34 @@ export default function Navbar() {
   const currentHighlightedId = hoveredNav || activeNavId
 
   const navItems = [
-    { id: 'hero', label: 'HOME', href: '#hero' },
-    { id: 'about', label: 'ABOUT', href: '#about' },
-    { id: 'layouts', label: 'LAYOUTS', href: '#layouts' },
-    { id: 'floor-map', label: 'FLOOR MAP', href: '#floor-map' },
-    { id: 'contact', label: 'CONTACT', href: '#contact' },
+    { id: 'hero', label: 'HOME', href: '#hero', path: '/' },
+    { id: 'about', label: 'ABOUT', href: '#about', path: '/#about' },
+    { id: 'project', label: 'PROJECT', href: '/project', path: '/project', isRoute: true },
+    { id: 'blog', label: 'BLOG', href: '/blog', path: '/blog', isRoute: true },
+    { id: 'contact', label: 'CONTACT', href: '#contact', path: '/#contact' },
   ]
 
-  const handleNavClick = (e, targetId) => {
+  const handleNavClick = (e, target) => {
     e.preventDefault()
     setMenuOpen(false)
-    if (targetId === 'hero') {
+
+    const item = typeof target === 'object' ? target : navItems.find((n) => n.id === target) || { id: target, href: `#${target}` }
+
+    if (item.isRoute) {
+      navigate(item.path)
+      return
+    }
+
+    if (location.pathname !== '/') {
+      navigate(item.path || `/${item.href}`)
+      return
+    }
+
+    if (item.id === 'hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
-    const el = document.getElementById(targetId)
+    const el = document.getElementById(item.id)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
     }
@@ -88,7 +108,7 @@ export default function Navbar() {
             >
               <img
                 src={logo}
-                alt="Sky Connect Nagpur"
+                alt="Skyconnect Nagpur"
                 className="h-11 sm:h-13 lg:h-15 xl:h-16 w-auto object-contain filter drop-shadow-md group-hover:scale-105 transition-all duration-300"
               />
             </a>
@@ -131,7 +151,7 @@ export default function Navbar() {
                   key={item.id}
                   href={item.href}
                   onMouseEnter={() => setHoveredNav(item.id)}
-                  onClick={(e) => handleNavClick(e, item.id)}
+                  onClick={(e) => handleNavClick(e, item)}
                   className="group relative cursor-pointer"
                 >
                   {navContent}
@@ -182,7 +202,7 @@ export default function Navbar() {
               <div>
                 <div className="flex items-center justify-between pb-6 border-b border-white/10">
                   <span className="font-mono text-xs text-[#EFCA74] tracking-widest uppercase font-bold">
-                    SKY CONNECT NAGPUR
+                    SKYCONNECT NAGPUR
                   </span>
                   <button
                     onClick={() => setMenuOpen(false)}
@@ -197,7 +217,7 @@ export default function Navbar() {
                     <a
                       key={item.id}
                       href={item.href}
-                      onClick={(e) => handleNavClick(e, item.id)}
+                      onClick={(e) => handleNavClick(e, item)}
                       className="block text-lg font-sans font-semibold tracking-[0.16em] uppercase text-white hover:text-[#EFCA74] transition-colors"
                     >
                       {item.label}
@@ -239,7 +259,7 @@ export default function Navbar() {
       <EnquiryModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title="Enquire About Sky Connect"
+        title="Enquire About Skyconnect"
       />
     </>
   )

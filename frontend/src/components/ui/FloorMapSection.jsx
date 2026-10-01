@@ -109,7 +109,7 @@ export default function FloorMapSection({ onEnquire, children }) {
                 >
                   <img
                     src={floorMapImg}
-                    alt="Sky Connect 3 BHK Architecture Plan"
+                    alt="Skyconnect 3 BHK Architecture Plan"
                     className="w-full h-full object-contain group-hover/inner:scale-105 transition-transform duration-500"
                   />
                   
@@ -144,7 +144,7 @@ export default function FloorMapSection({ onEnquire, children }) {
                 >
                   <img
                     src={isometricImg}
-                    alt="Sky Connect 3D Isometric View"
+                    alt="Skyconnect 3D Isometric View"
                     className="w-full h-full object-contain group-hover/inner:scale-105 transition-transform duration-500"
                   />
                   
@@ -179,7 +179,7 @@ export default function FloorMapSection({ onEnquire, children }) {
                 >
                   <img
                     src={parkingMapImg}
-                    alt="Sky Connect Parking Floor Plan"
+                    alt="Skyconnect Parking Floor Plan"
                     className="w-full h-full object-contain p-2 bg-white group-hover/inner:scale-105 transition-transform duration-500"
                   />
                   
@@ -225,7 +225,7 @@ export default function FloorMapSection({ onEnquire, children }) {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-zinc-200 mb-4 gap-4">
                 <div>
                   <h3 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
-                    Sky Connect — Architectural {lightboxActiveTab === '2d' ? '2D Floor Plan' : lightboxActiveTab === '3d' ? '3D Isometric View' : 'Parking Floor Plan'}
+                    Skyconnect — Architectural {lightboxActiveTab === '2d' ? '2D Floor Plan' : lightboxActiveTab === '3d' ? '3D Isometric View' : 'Parking Floor Plan'}
                   </h3>
                   <p className="font-mono text-xs text-slate-500 mt-0.5">
                     100% Vastu Compliant • Jaiprakash Nagar, Nagpur
@@ -279,7 +279,7 @@ export default function FloorMapSection({ onEnquire, children }) {
               <div className="bg-[#ECEEF1] p-4 flex items-center justify-center rounded-none overflow-auto">
                 <img
                   src={lightboxActiveTab === '2d' ? floorMapImg : lightboxActiveTab === '3d' ? isometricImg : parkingMapImg}
-                  alt={lightboxActiveTab === '2d' ? "Sky Connect 2D Floor Plan" : lightboxActiveTab === '3d' ? "Sky Connect 3D Isometric View" : "Sky Connect Parking Floor Plan"}
+                  alt={lightboxActiveTab === '2d' ? "Skyconnect 2D Floor Plan" : lightboxActiveTab === '3d' ? "Skyconnect 3D Isometric View" : "Skyconnect Parking Floor Plan"}
                   className="w-full h-auto max-h-[75vh] object-contain"
                 />
               </div>

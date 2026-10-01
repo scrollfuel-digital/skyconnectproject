@@ -3,7 +3,7 @@ import { ExternalLink } from 'lucide-react'
 import './LocationMap.css'
 
 const SKYCONNECT = { lat: 21.099812242389685, lng: 79.06337550973734 }
-const SKYCONNECT_ADDRESS = 'SkyConnect, Wardha Road, Jaiprakash Nagar, Nagpur – 440025'
+const SKYCONNECT_ADDRESS = 'Skyconnect, Wardha Road, Jaiprakash Nagar, Nagpur – 440025'
 
 const locations = [
   {
@@ -17,7 +17,7 @@ const locations = [
     lat: 21.10422201975818,
     lng: 79.06760458459217,
     address: 'Wardha Road, Jaiprakash Nagar, Nagpur',
-    description: 'Premier fashion and lifestyle retail destination close to SkyConnect.',
+    description: 'Premier fashion and lifestyle retail destination close to Skyconnect.',
   },
   {
     id: 'jp-metro',
@@ -134,7 +134,7 @@ export default function LocationSection() {
             <p className="eyebrow">Connectivity & Location</p>
             <h1>Everything Around You</h1>
             <p className="intro">
-              Explore nearby hubs and directions starting directly from <strong>SkyConnect, Wardha Road, Jaiprakash Nagar, Nagpur</strong>.
+              Explore nearby hubs and directions starting directly from <strong>Skyconnect, Wardha Road, Jaiprakash Nagar, Nagpur</strong>.
             </p>
           </div>
 
@@ -190,7 +190,7 @@ export default function LocationSection() {
             </div>
 
             <div className="origin-note">
-              <span className="origin-dot" /> Routes start at <strong>SkyConnect</strong>
+              <span className="origin-dot" /> Routes start at <strong>Skyconnect</strong>
             </div>
           </aside>
 
@@ -199,7 +199,7 @@ export default function LocationSection() {
             <div className="relative w-full h-full min-h-[440px] bg-stone-200">
               <iframe
                 key={selectedLocation?.id}
-                title={`SkyConnect Google Map - ${selectedLocation?.name}`}
+                title={`Skyconnect Google Map - ${selectedLocation?.name}`}
                 src={googleMapEmbedUrl}
                 className="w-full h-full border-0 filter saturate-[0.95]"
                 allowFullScreen=""

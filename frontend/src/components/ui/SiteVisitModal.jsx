@@ -181,7 +181,7 @@ export default function SiteVisitModal({ isOpen, onClose }) {
               </div>
               <h3 className="font-serif text-3xl font-bold text-slate-900">Site Visit Confirmed!</h3>
               <p className="text-sm text-stone-600 max-w-xs mx-auto leading-relaxed">
-                Thank you <span className="font-semibold text-slate-900">{formData.name}</span>. Your site visit to Sky Connect is scheduled for <span className="font-semibold text-slate-900">{date}</span> at <span className="font-semibold text-slate-900">{time}</span>.
+                Thank you <span className="font-semibold text-slate-900">{formData.name}</span>. Your site visit to Skyconnect is scheduled for <span className="font-semibold text-slate-900">{date}</span> at <span className="font-semibold text-slate-900">{time}</span>.
               </p>
               <button
                 onClick={handleCloseModal}

@@ -98,7 +98,7 @@ export default function EnquiryModal({ isOpen, onClose, title = "Schedule a Site
                 Enquiry Submitted!
               </h3>
               <p className="font-sans text-sm text-slate-600 max-w-xs leading-relaxed">
-                Thank you, <span className="font-semibold text-slate-900">{formData.name}</span>. Our Sky Connect sales team will contact you shortly.
+                Thank you, <span className="font-semibold text-slate-900">{formData.name}</span>. Our Skyconnect sales team will contact you shortly.
               </p>
             </div>
           ) : (
@@ -106,7 +106,7 @@ export default function EnquiryModal({ isOpen, onClose, title = "Schedule a Site
               <div className="mb-6">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 border border-slate-300 text-[#B89230] text-[10px] font-mono tracking-[0.25em] uppercase font-bold mb-3 rounded-none">
                   <Sparkles className="w-3 h-3" />
-                  SKY CONNECT NAGPUR
+                  SKYCONNECT NAGPUR
                 </div>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900">
                   {title}
