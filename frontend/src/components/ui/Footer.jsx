@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import {
   MapPin,
   ArrowRight,
-  Instagram
+  Instagram,
+  Phone
 } from 'lucide-react'
 import logo from '../../assets/LOGO/SkyConnect Logo.png'
 
@@ -33,9 +34,9 @@ export default function Footer() {
   return (
     <footer className="w-full bg-[#FAF7F2] text-[#3C2D24] pt-10 pb-6 font-sans border-t border-[#EAE3D2] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-8 items-start">
-          
+
           {/* COLUMN 1 (BRAND & SOCIALS - 4 COLS) */}
           <div className="lg:col-span-4 space-y-2.5">
             <Link to="/" className="inline-block group">
@@ -125,9 +126,19 @@ export default function Footer() {
                   </h4>
                 </div>
                 <p className="font-sans text-xs text-[#6B5A4E] leading-relaxed">
-                  7 CROWN, Plot 30–31, Beside Hotel Trance,<br />
+                  7 CROWN, Plot 30–31, Beside Hotel Trance,
                   Jaiprakash Nagar, Nagpur – 440025
                 </p>
+                <div className="pt-2 space-y-1.5 text-xs font-sans">
+                  <a
+                    href="tel:+918989666888"
+                    className="flex items-center gap-2 text-[#3C2D24] hover:text-[#966042] transition-colors font-bold"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-[#966042] shrink-0" />
+                    <span>89896 66888 , 94040 70345</span>
+                  </a>
+                 
+                </div>
               </div>
 
               {/* Get Directions Button in Yellow Box Area */}

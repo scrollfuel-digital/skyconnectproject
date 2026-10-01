@@ -7,6 +7,19 @@ const SKYCONNECT_ADDRESS = 'Skyconnect, Wardha Road, Jaiprakash Nagar, Nagpur â€
 
 const locations = [
   {
+    id: 'taj-gateway',
+    name: 'Hotel Taj Gateway',
+    shortName: 'Hotel Taj Gateway',
+    time: '3 min',
+    category: 'Hotels',
+    symbol: 'H',
+    color: '#b9935a',
+    lat: 21.10430495809791,
+    lng: 79.05723717441619,
+    address: 'Wardha Road, Nagpur',
+    description: 'Premier luxury hotel and dining landmark located on Wardha Road.',
+  },
+  {
     id: 'westside',
     name: 'Westside',
     shortName: 'Westside',
@@ -115,7 +128,7 @@ const locations = [
 export default function LocationSection() {
   const [selectedLocation, setSelectedLocation] = useState(locations[0])
 
-  const originQuery = encodeURIComponent('Hotel Trance, Wardha Road, Jaiprakash Nagar, Nagpur')
+  const originQuery = `${SKYCONNECT.lat},${SKYCONNECT.lng}`
   const destQuery = selectedLocation ? `${selectedLocation.lat},${selectedLocation.lng}` : `${SKYCONNECT.lat},${SKYCONNECT.lng}`
 
   const googleMapEmbedUrl = `https://maps.google.com/maps?saddr=${originQuery}&daddr=${destQuery}&z=15&t=&ie=UTF8&output=embed`

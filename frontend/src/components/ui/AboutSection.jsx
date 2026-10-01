@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, RefreshCw } from 'lucide-react'
-import frontViewImg from '../../assets/About section/frontView.jpg'
+import frontViewImg from '../../assets/About section/7 crown front view.jpeg'
 import backViewImg from '../../assets/About section/backView.jpg'
 
 export default function AboutSection({ onEnquire }) {
