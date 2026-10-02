@@ -136,7 +136,7 @@ export default function Footer() {
                   >
                     <Phone className="w-3.5 h-3.5 text-[#966042] shrink-0" />
                    <span>
-  8989&nbsp;&nbsp;&nbsp;666&nbsp;&nbsp;&nbsp;888, 9404&nbsp;&nbsp;&nbsp;070&nbsp;&nbsp;&nbsp;345
+  8989&nbsp;&nbsp;&nbsp;666&nbsp;&nbsp;&nbsp;888, 94040&nbsp;&nbsp;&nbsp;70345, 89898&nbsp;&nbsp;&nbsp;32323
 </span>
                   </a>
                  
