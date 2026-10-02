@@ -135,7 +135,9 @@ export default function Footer() {
                     className="flex items-center gap-2 text-[#3C2D24] hover:text-[#966042] transition-colors font-bold"
                   >
                     <Phone className="w-3.5 h-3.5 text-[#966042] shrink-0" />
-                    <span>89896 66888 , 94040 70345</span>
+                   <span>
+  8989&nbsp;&nbsp;&nbsp;666&nbsp;&nbsp;&nbsp;888, 9404&nbsp;&nbsp;&nbsp;070&nbsp;&nbsp;&nbsp;345
+</span>
                   </a>
                  
                 </div>
